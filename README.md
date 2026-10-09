@@ -1,5 +1,7 @@
 # D.A.D Extension Frontend
 
+<!-- Project overview and repository documentation. -->
+
 Created and maintained by **CSPSlackers** (2026)
 
 ## Overview
