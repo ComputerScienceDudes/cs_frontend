@@ -24,20 +24,20 @@ export function getFullURL(path) {
 }
 
 export var pythonURI;
-if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+//if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
     pythonURI = "http://localhost:8328";  // Same URI for localhost or 127.0.0.1
-} else {
-    pythonURI = "https://dad.opencodingsociety.com";
+//} else {
+    //pythonURI = "https://dad.opencodingsociety.com";
 
-}
+//}
 
 export var javaURI;
 // 127.0.0.1:8585 does not work for some machines
-if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+//if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
         javaURI = "http://localhost:8328";
-} else {
-    javaURI = "https://dad.opencodingsociety.com";
-}
+//} else {
+    //javaURI = "https://dad.opencodingsociety.com";
+//}
 
 export const fetchOptions = {
     method: 'GET',  // Default method is GET
