@@ -6,3 +6,7 @@ gem "webrick", "~> 1.7"
 
 gem "execjs", "~> 2.8"
 gem "faraday-retry", "~> 2.3"
+
+gem "bigdecimal", "~> 4.1"
+
+gem "csv", "~> 3.3"
