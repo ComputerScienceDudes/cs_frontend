@@ -1,11 +1,11 @@
 class StatusPanel {
   constructor(config = {}) {
     this.config = {
-      id: 'ocs-status-panel',
+      id: 'sass-status-panel',
       title: '',
       fields: [],
       actions: [], // Array of { label, onClick, danger, title }
-      className: 'ocs-status-panel',
+      className: 'sass-status-panel',
       mountTo: null,
       width: '260px',
       padding: '12px 14px',
@@ -54,15 +54,15 @@ class StatusPanel {
       padding: this.config.padding,
       borderRadius: this.config.borderRadius,
       fontFamily: this.config.fontFamily,
-      background: this.config.theme.background || 'var(--ocs-status-panel-background)',
-      border: `1px solid ${this.config.theme.borderColor || 'var(--ocs-status-panel-border)'}`,
-      color: this.config.theme.textColor || 'var(--ocs-status-panel-text)',
+      background: this.config.theme.background || 'var(--sass-status-panel-background)',
+      border: `1px solid ${this.config.theme.borderColor || 'var(--sass-status-panel-border)'}`,
+      color: this.config.theme.textColor || 'var(--sass-status-panel-text)',
       boxShadow: this.config.theme.boxShadow || 'none',
     });
 
     const title = document.createElement('div');
     Object.assign(title.style, {
-      color: this.config.theme.accentColor || 'var(--ocs-status-panel-accent)',
+      color: this.config.theme.accentColor || 'var(--sass-status-panel-accent)',
       fontSize: '12px',
       fontWeight: 'bold',
       letterSpacing: '1px',
@@ -78,7 +78,7 @@ class StatusPanel {
         const section = document.createElement('div');
         Object.assign(section.style, {
           marginTop: field.marginTop || '8px',
-          color: this.config.theme.accentColor || 'var(--ocs-status-panel-accent)',
+          color: this.config.theme.accentColor || 'var(--sass-status-panel-accent)',
           fontSize: '11px',
           letterSpacing: '1px',
         });
@@ -100,7 +100,7 @@ class StatusPanel {
       Object.assign(actionsContainer.style, {
         marginTop: '12px',
         paddingTop: '10px',
-        borderTop: `1px solid ${this.config.theme.borderColor || 'var(--ocs-status-panel-border)'}`,
+        borderTop: `1px solid ${this.config.theme.borderColor || 'var(--sass-status-panel-border)'}`,
         display: 'flex',
         flexDirection: 'column',
         gap: '6px',
@@ -116,13 +116,13 @@ class StatusPanel {
 
         const bgColor = action.danger 
           ? '#d32f2f'
-          : (this.config.theme.secondaryButtonBackground || 'var(--ocs-status-panel-button-bg)');
+          : (this.config.theme.secondaryButtonBackground || 'var(--sass-status-panel-button-bg)');
         const textColor = action.danger
           ? '#fff'
-          : (this.config.theme.secondaryButtonTextColor || 'var(--ocs-status-panel-button-text)');
+          : (this.config.theme.secondaryButtonTextColor || 'var(--sass-status-panel-button-text)');
         const borderColor = action.danger
           ? '#d32f2f'
-          : (this.config.theme.borderColor || 'var(--ocs-status-panel-border)');
+          : (this.config.theme.borderColor || 'var(--sass-status-panel-border)');
 
         Object.assign(btn.style, {
           padding: '6px 10px',

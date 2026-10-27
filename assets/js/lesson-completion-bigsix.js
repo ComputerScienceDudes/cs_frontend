@@ -144,8 +144,8 @@
             console.log('  Metadata:', lessonMetadata);
             
             // Record event in analytics
-            if (window.OCSEnhancedAnalytics) {
-                window.OCSEnhancedAnalytics.recordEvent('lesson_completed', lessonMetadata);
+            if (window.SASSEnhancedAnalytics) {
+                window.SASSEnhancedAnalytics.recordEvent('lesson_completed', lessonMetadata);
             }
             
             // Send to backend
@@ -329,8 +329,8 @@
             if (lessonId && !this.lessonStartTimes.has(lessonId)) {
                 this.lessonStartTimes.set(lessonId, new Date());
                 
-                if (window.OCSEnhancedAnalytics) {
-                    window.OCSEnhancedAnalytics.recordEvent('lesson_started', {
+                if (window.SASSEnhancedAnalytics) {
+                    window.SASSEnhancedAnalytics.recordEvent('lesson_started', {
                         lessonId: lessonId,
                         questName: this.extractQuestNameFromURL(),
                         moduleName: this.extractModuleNameFromURL()

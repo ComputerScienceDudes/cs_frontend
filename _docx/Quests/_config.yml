@@ -20,5 +20,5 @@ files:
 
   QuestOfSpook-Game-Development:
     title: "Quest of Spook: Game Development"
-    description: "Halloween-themed game development curriculum using JavaScript and OCS framework"
+    description: "Halloween-themed game development curriculum using JavaScript and SASS framework"
     permalink: "/quests/questofspook-game-dev/"

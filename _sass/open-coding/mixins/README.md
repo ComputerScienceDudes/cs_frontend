@@ -1,4 +1,4 @@
-# OCS SCSS Mixins Reference
+# SASS SCSS Mixins Reference
 
 Quick reference for all available mixins in the Open Coding Society SCSS framework.
 
@@ -648,4 +648,4 @@ All mixins automatically use these CSS custom properties when available:
 
 **Last Updated**: February 2026  
 **Maintained by**: Open Coding Society  
-**Purpose**: Reusable SCSS patterns for OCS interfaces
+**Purpose**: Reusable SCSS patterns for SASS interfaces

@@ -160,19 +160,19 @@ class Picker {
         minWidth: '320px',
         maxHeight: '75vh',
         overflowY: 'auto',
-        background: this.config.theme.background || 'var(--ocs-game-panel-bg, rgba(13,13,26,0.92))',
-        border: `2px solid ${this.config.theme.borderColor || 'var(--ocs-game-accent, #4ecca3)'}`,
+        background: this.config.theme.background || 'var(--sass-game-panel-bg, rgba(13,13,26,0.92))',
+        border: `2px solid ${this.config.theme.borderColor || 'var(--sass-game-accent, #4ecca3)'}`,
         borderRadius: '12px',
         padding: '24px 28px',
         fontFamily: this.config.fontFamily,
-        color: this.config.theme.textColor || 'var(--ocs-game-text, #e0e0e0)',
+        color: this.config.theme.textColor || 'var(--sass-game-text, #e0e0e0)',
         boxShadow: this.config.theme.boxShadow || '0 0 20px rgba(78,204,163,0.18)',
       });
 
       // Title
       const title = document.createElement('div');
       Object.assign(title.style, {
-        color: this.config.theme.accentColor || 'var(--ocs-game-accent, #4ecca3)',
+        color: this.config.theme.accentColor || 'var(--sass-game-accent, #4ecca3)',
         fontSize: '16px',
         fontWeight: 'bold',
         textTransform: 'uppercase',
@@ -186,7 +186,7 @@ class Picker {
       if (this.config.description) {
         const description = document.createElement('div');
         Object.assign(description.style, {
-          color: this.config.theme.secondaryTextColor || 'var(--ocs-game-muted, #c7f2d4)',
+          color: this.config.theme.secondaryTextColor || 'var(--sass-game-muted, #c7f2d4)',
           fontSize: '13px',
           marginBottom: '18px',
           lineHeight: '1.6',
@@ -213,11 +213,11 @@ class Picker {
           const isSelected = selectedItem?.id === item.id;
           Object.assign(button.style, {
             background: isSelected
-              ? (this.config.theme.selectedBackground || 'var(--ocs-game-panel-selected-bg, #2a2a4a)')
-              : (this.config.theme.inputBackground || 'var(--ocs-game-surface-alt, #1a1a2e)'),
+              ? (this.config.theme.selectedBackground || 'var(--sass-game-panel-selected-bg, #2a2a4a)')
+              : (this.config.theme.inputBackground || 'var(--sass-game-surface-alt, #1a1a2e)'),
             borderColor: isSelected
-              ? (this.config.theme.selectedBorderColor || 'var(--ocs-game-selected-border, #7effff)')
-              : (this.config.theme.borderColor || 'var(--ocs-game-accent, #4ecca3)'),
+              ? (this.config.theme.selectedBorderColor || 'var(--sass-game-selected-border, #7effff)')
+              : (this.config.theme.borderColor || 'var(--sass-game-accent, #4ecca3)'),
             opacity: isSelected ? '1' : '0.85',
             boxShadow: isSelected
               ? (this.config.theme.selectedShadow || '0 0 20px rgba(126,255,255,0.35)')
@@ -233,14 +233,14 @@ class Picker {
         button.type = 'button';
         button.setAttribute('aria-label', `Select ${item.label}`);
         Object.assign(button.style, {
-          background: this.config.theme.inputBackground || 'var(--ocs-game-surface-alt, #1a1a2e)',
-          border: `2px solid ${this.config.theme.borderColor || 'var(--ocs-game-accent, #4ecca3)'}`,
+          background: this.config.theme.inputBackground || 'var(--sass-game-surface-alt, #1a1a2e)',
+          border: `2px solid ${this.config.theme.borderColor || 'var(--sass-game-accent, #4ecca3)'}`,
           borderRadius: '8px',
           padding: '8px',
           textAlign: 'center',
           cursor: 'pointer',
           transition: 'all 0.2s ease',
-          color: this.config.theme.textColor || 'var(--ocs-game-text, #e0e0e0)',
+          color: this.config.theme.textColor || 'var(--sass-game-text, #e0e0e0)',
         });
 
         // Image - use sprite cell (0,0) for sprite sheets, full image otherwise
@@ -287,7 +287,7 @@ class Picker {
         name.textContent = item.label;
         Object.assign(name.style, {
           fontSize: '11px',
-          color: this.config.theme.accentColor || 'var(--ocs-game-accent, #4ecca3)',
+          color: this.config.theme.accentColor || 'var(--sass-game-accent, #4ecca3)',
           wordBreak: 'break-word',
         });
 
@@ -297,7 +297,7 @@ class Picker {
         Object.assign(meta.style, {
           fontSize: '9px',
           marginTop: '4px',
-          color: this.config.theme.secondaryTextColor || 'var(--ocs-game-muted, #c7f2d4)',
+          color: this.config.theme.secondaryTextColor || 'var(--sass-game-muted, #c7f2d4)',
         });
 
         button.appendChild(imageElement);
@@ -333,9 +333,9 @@ class Picker {
         cancelBtn.type = 'button';
         cancelBtn.textContent = this.config.cancelLabel;
         Object.assign(cancelBtn.style, {
-          background: this.config.theme.secondaryButtonBackground || 'var(--ocs-game-surface-alt, #1a1a2e)',
-          color: this.config.theme.secondaryButtonTextColor || 'var(--ocs-game-text, #e0e0e0)',
-          border: `1px solid ${this.config.theme.borderColor || 'var(--ocs-game-accent, #4ecca3)'}`,
+          background: this.config.theme.secondaryButtonBackground || 'var(--sass-game-surface-alt, #1a1a2e)',
+          color: this.config.theme.secondaryButtonTextColor || 'var(--sass-game-text, #e0e0e0)',
+          border: `1px solid ${this.config.theme.borderColor || 'var(--sass-game-accent, #4ecca3)'}`,
           borderRadius: '4px',
           padding: '12px 16px',
           fontFamily: this.config.fontFamily,
@@ -350,8 +350,8 @@ class Picker {
       doneBtn.type = 'button';
       doneBtn.textContent = this.config.confirmLabel;
       Object.assign(doneBtn.style, {
-        background: this.config.theme.buttonBackground || 'var(--ocs-game-accent, #4ecca3)',
-        color: this.config.theme.buttonTextColor || 'var(--ocs-game-surface-contrast, #0d0d1a)',
+        background: this.config.theme.buttonBackground || 'var(--sass-game-accent, #4ecca3)',
+        color: this.config.theme.buttonTextColor || 'var(--sass-game-surface-contrast, #0d0d1a)',
         border: 'none',
         borderRadius: '4px',
         padding: '12px 16px',

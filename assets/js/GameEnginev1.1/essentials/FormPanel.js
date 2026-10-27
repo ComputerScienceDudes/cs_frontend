@@ -1,15 +1,15 @@
 class FormPanel {
   constructor(config = {}) {
     this.config = {
-      id: 'ocs-form-panel',
+      id: 'sass-form-panel',
       title: '',
       description: '',
       submitLabel: 'Submit',
       cancelLabel: 'Cancel',
       showCancel: false,
       closeOnBackdrop: false,
-      className: 'ocs-form-panel',
-      overlayClassName: 'ocs-form-panel-overlay',
+      className: 'sass-form-panel',
+      overlayClassName: 'sass-form-panel-overlay',
       fields: [],
       mountTo: null,
       zIndex: '10000',
@@ -87,7 +87,7 @@ class FormPanel {
         alignItems: 'center',
         justifyContent: 'center',
         padding: '16px',
-        background: this.config.theme.overlayBackground || 'var(--ocs-form-overlay-background)',
+        background: this.config.theme.overlayBackground || 'var(--sass-form-overlay-background)',
       });
 
       const panel = document.createElement('section');
@@ -102,15 +102,15 @@ class FormPanel {
         padding: this.config.padding,
         borderRadius: this.config.borderRadius,
         fontFamily: this.config.fontFamily,
-        background: this.config.theme.background || 'var(--ocs-form-background)',
-        border: `2px solid ${this.config.theme.borderColor || 'var(--ocs-form-border)'}`,
-        color: this.config.theme.textColor || 'var(--ocs-form-text)',
+        background: this.config.theme.background || 'var(--sass-form-background)',
+        border: `2px solid ${this.config.theme.borderColor || 'var(--sass-form-border)'}`,
+        color: this.config.theme.textColor || 'var(--sass-form-text)',
         boxShadow: this.config.theme.boxShadow || 'none',
       });
 
       const title = document.createElement('div');
       Object.assign(title.style, {
-        color: this.config.theme.accentColor || 'var(--ocs-form-accent)',
+        color: this.config.theme.accentColor || 'var(--sass-form-accent)',
         fontSize: '16px',
         fontWeight: 'bold',
         letterSpacing: '2px',
@@ -124,7 +124,7 @@ class FormPanel {
       if (this.config.description) {
         const description = document.createElement('div');
         Object.assign(description.style, {
-          color: this.config.theme.secondaryTextColor || 'var(--ocs-form-secondary-text)',
+          color: this.config.theme.secondaryTextColor || 'var(--sass-form-secondary-text)',
           fontSize: '12px',
           lineHeight: '1.6',
           marginBottom: '16px',
@@ -149,7 +149,7 @@ class FormPanel {
           section.textContent = field.title;
           Object.assign(section.style, {
             marginTop: field.marginTop || '8px',
-            color: this.config.theme.accentColor || 'var(--ocs-form-accent)',
+            color: this.config.theme.accentColor || 'var(--sass-form-accent)',
             fontSize: '11px',
             letterSpacing: '1px',
           });
@@ -160,7 +160,7 @@ class FormPanel {
         const label = document.createElement('label');
         label.textContent = field.label;
         Object.assign(label.style, {
-          color: this.config.theme.accentColor || 'var(--ocs-form-accent)',
+          color: this.config.theme.accentColor || 'var(--sass-form-accent)',
           fontSize: '12px',
         });
 
@@ -178,11 +178,11 @@ class FormPanel {
         input.value = initialValues[field.name] || field.value || '';
 
         Object.assign(input.style, {
-          background: this.config.theme.inputBackground || 'var(--ocs-form-input-background)',
-          border: `1px solid ${this.config.theme.borderColor || 'var(--ocs-form-border)'}`,
+          background: this.config.theme.inputBackground || 'var(--sass-form-input-background)',
+          border: `1px solid ${this.config.theme.borderColor || 'var(--sass-form-border)'}`,
           borderRadius: '4px',
           padding: '8px',
-          color: this.config.theme.textColor || 'var(--ocs-form-text)',
+          color: this.config.theme.textColor || 'var(--sass-form-text)',
           fontFamily: this.config.fontFamily,
         });
 
@@ -209,9 +209,9 @@ class FormPanel {
         cancelBtn.type = 'button';
         cancelBtn.textContent = this.config.cancelLabel;
         Object.assign(cancelBtn.style, {
-          background: this.config.theme.secondaryButtonBackground || 'var(--ocs-form-secondary-button-background)',
-          color: this.config.theme.secondaryButtonTextColor || 'var(--ocs-form-secondary-button-text)',
-          border: `1px solid ${this.config.theme.borderColor || 'var(--ocs-form-border)'}`,
+          background: this.config.theme.secondaryButtonBackground || 'var(--sass-form-secondary-button-background)',
+          color: this.config.theme.secondaryButtonTextColor || 'var(--sass-form-secondary-button-text)',
+          border: `1px solid ${this.config.theme.borderColor || 'var(--sass-form-border)'}`,
           borderRadius: '4px',
           padding: '10px 14px',
           fontFamily: this.config.fontFamily,
@@ -225,8 +225,8 @@ class FormPanel {
       submitBtn.type = 'submit';
       submitBtn.textContent = this.config.submitLabel;
       Object.assign(submitBtn.style, {
-        background: this.config.theme.buttonBackground || 'var(--ocs-form-button-background)',
-        color: this.config.theme.buttonTextColor || 'var(--ocs-form-button-text)',
+        background: this.config.theme.buttonBackground || 'var(--sass-form-button-background)',
+        color: this.config.theme.buttonTextColor || 'var(--sass-form-button-text)',
         border: 'none',
         borderRadius: '4px',
         padding: '10px 14px',

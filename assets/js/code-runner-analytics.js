@@ -215,8 +215,8 @@
          * Track code copy in CODE_RUNNER
          */
         trackCopy: function(code, metadata = {}) {
-            if (window.OCSEnhancedAnalytics) {
-                window.OCSEnhancedAnalytics.recordEvent('code_copy', {
+            if (window.SASSEnhancedAnalytics) {
+                window.SASSEnhancedAnalytics.recordEvent('code_copy', {
                     source: 'code_runner_editor',
                     codeLength: code.length,
                     ...metadata,
@@ -230,8 +230,8 @@
          * Track code paste in CODE_RUNNER
          */
         trackPaste: function(code, metadata = {}) {
-            if (window.OCSEnhancedAnalytics) {
-                window.OCSEnhancedAnalytics.recordEvent('code_paste', {
+            if (window.SASSEnhancedAnalytics) {
+                window.SASSEnhancedAnalytics.recordEvent('code_paste', {
                     source: 'code_runner_editor',
                     codeLength: code.length,
                     ...metadata
@@ -247,8 +247,8 @@
             this.startTime = Date.now();
             this.executionCount++;
             
-            if (window.OCSEnhancedAnalytics) {
-                window.OCSEnhancedAnalytics.recordEvent('code_execute_start', {
+            if (window.SASSEnhancedAnalytics) {
+                window.SASSEnhancedAnalytics.recordEvent('code_execute_start', {
                     source: 'code_runner',
                     language: this.currentLanguage,
                     codeLength: this.currentCode.length,
@@ -265,8 +265,8 @@
             const executionTime = this.startTime ? Date.now() - this.startTime : 0;
             this.successCount++;
             
-            if (window.OCSEnhancedAnalytics) {
-                window.OCSEnhancedAnalytics.recordEvent('code_execute_success', {
+            if (window.SASSEnhancedAnalytics) {
+                window.SASSEnhancedAnalytics.recordEvent('code_execute_success', {
                     source: 'code_runner',
                     language: this.currentLanguage,
                     executionTimeMs: executionTime,
@@ -286,8 +286,8 @@
             const executionTime = this.startTime ? Date.now() - this.startTime : 0;
             this.errorCount++;
             
-            if (window.OCSEnhancedAnalytics) {
-                window.OCSEnhancedAnalytics.recordEvent('code_execute_error', {
+            if (window.SASSEnhancedAnalytics) {
+                window.SASSEnhancedAnalytics.recordEvent('code_execute_error', {
                     source: 'code_runner',
                     language: this.currentLanguage,
                     executionTimeMs: executionTime,
@@ -303,8 +303,8 @@
          * Track FRQ submission
          */
         trackFRQSubmit: function(frqMetadata = {}) {
-            if (window.OCSEnhancedAnalytics) {
-                window.OCSEnhancedAnalytics.recordEvent('frq_submit', {
+            if (window.SASSEnhancedAnalytics) {
+                window.SASSEnhancedAnalytics.recordEvent('frq_submit', {
                     source: 'code_runner',
                     language: this.currentLanguage,
                     totalExecutions: this.executionCount,

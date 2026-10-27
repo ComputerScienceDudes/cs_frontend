@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ocs-pwa-v1';
+const CACHE_NAME = 'sass-pwa-v1';
 const OFFLINE_URL = '/mobile/';
 
 const PRECACHE_ASSETS = [

@@ -1,6 +1,6 @@
 # Module Illustrations
 Title: "Applying Object-Based Game Mechanics"
-Description: "This module introduces the OCS GameEngine and its core mechanics using GameBuilder. Learners explore key objects—Backgrounds, Players, NPCs, and Barriers—while developing foundational understanding of object properties, interactions, and system behavior. This transition from semantic/syntax lessons to applied object-based mechanics prepares students to design and implement their own interactive games within the GameEngine environment."
+Description: "This module introduces the SASS GameEngine and its core mechanics using GameBuilder. Learners explore key objects—Backgrounds, Players, NPCs, and Barriers—while developing foundational understanding of object properties, interactions, and system behavior. This transition from semantic/syntax lessons to applied object-based mechanics prepares students to design and implement their own interactive games within the GameEngine environment."
 
 Topics:
   - title: "GameEngine Briefing"
