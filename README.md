@@ -2,7 +2,7 @@
 
 <!-- Project overview and repository documentation. -->
 
-Created and maintained by **CSPSlackers** (2026)
+Created and maintained by **ComputerScienceDudes** (2026)
 
 ## Overview
 
@@ -74,8 +74,8 @@ Deeds_frontend/
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/CSPSlackers/Deeds_frontend.git
-   cd Deeds_frontend
+   git clone https://github.com/ComputerScienceDudes/cs_frontend
+   cd cs_frontend
    ```
 
 2. **Install dependencies**:
@@ -205,8 +205,8 @@ The project is deployed automatically through GitHub Pages Actions:
 1. **Settings** → **Pages** → Select "GitHub Actions" as build source
 2. **Update `_config.yml`**:
    ```yml
-   github_repo: "Deeds_frontend"
-   baseurl: "/Deeds_frontend"
+   github_repo: "cs_frontend"
+   baseurl: "/cs_frontend"
    ```
 3. **Update Makefile**:
    ```make
