@@ -35,3 +35,7 @@ textarea,
 select {
     background-color: $background;
 }
+
+// Opt-in shared components used by the Sass lessons and D.A.D. homepage.
+@import "grammar/main";
+@import "dad-home";

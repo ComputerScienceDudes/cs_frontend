@@ -1,0 +1,88 @@
+.ocs__btn {
+  --ocs-button-color: #{$ocs-accent};
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: $ocs-space;
+  min-height: 44px;
+  padding: $ocs-space $ocs-space * 2;
+  border: 1px solid var(--ocs-button-color);
+  border-radius: $ocs-radius;
+  color: var(--ocs-button-color);
+  background: transparent;
+  font: inherit;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: none;
+  cursor: pointer;
+  &.fill { background: var(--ocs-button-color); color: var(--pref-on-accent-color, #fff); }
+  &.outline { background: transparent; }
+  &.pill { border-radius: 999px; }
+  &.small { font-size: .875rem; }
+  &.alert-green { --ocs-button-color: #236342; }
+  &.alert-red { --ocs-button-color: #a52a2a; }
+  &:hover:not(:disabled) { filter: brightness(.9); }
+  &:focus-visible { @include ocs-focus; }
+  &:disabled { opacity: .55; cursor: not-allowed; }
+}
+
+.ocs__input {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: $ocs-space * 1.5;
+  border: 1px solid $ocs-border;
+  border-radius: $ocs-radius;
+  background: $ocs-surface;
+  color: $ocs-text;
+  font: inherit;
+  line-height: 1.5;
+  &.small { font-size: .875rem; }
+  &.medium { min-height: 44px; }
+  &.large { min-height: 52px; font-size: 1.125rem; }
+  &:focus-visible { @include ocs-focus; }
+  &:disabled { opacity: .6; cursor: not-allowed; }
+}
+textarea.ocs__input { resize: vertical; }
+
+.ocs__toggle {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  gap: $ocs-space * 1.5;
+  min-height: 44px;
+  color: $ocs-text;
+  cursor: pointer;
+  &-input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+  &-track {
+    position: relative;
+    flex: 0 0 48px;
+    width: 48px;
+    height: 28px;
+    border-radius: 999px;
+    background: #68756e;
+    transition: background .2s;
+    &::before {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 4px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #fff;
+      transition: transform .2s;
+    }
+  }
+  &-input:checked + &-track {
+    background: $ocs-accent;
+    &::before { transform: translateX(20px); }
+  }
+  &--green &-input:checked + &-track { background: #236342; }
+  &-input:focus-visible + &-track { @include ocs-focus; }
+  &-input:disabled ~ span { opacity: .55; cursor: not-allowed; }
+  &-label { font: inherit; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ocs__toggle-track, .ocs__toggle-track::before { transition: none; }
+}

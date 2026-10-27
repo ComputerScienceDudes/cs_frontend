@@ -79,9 +79,13 @@ Deeds_frontend/
    ```
 
 2. **Install dependencies**:
+   Use Ruby 3.3 (see `.ruby-version`), not Ruby 4. On macOS, install it with
+   `brew install ruby@3.3`; `make` automatically uses that installation.
+
    ```bash
-   bundle install          # For Jekyll
-   npm install            # For Node.js dependencies
+   python3 -m venv venv
+   venv/bin/python3 -m pip install -r requirements.txt
+   make bundle-install
    ```
 
 3. **Set up environment**:
@@ -94,7 +98,10 @@ Deeds_frontend/
    ```
 
 5. **View in browser**:
-   - Open `http://localhost:4500/Deeds_frontend`
+   - Open `http://localhost:4500/` (the current `_config.yml` uses an empty base URL).
+
+   Edit the homepage in `_projects/dad/pages/html/index.html`. `make` copies it
+   to root `index.html`, so edits made only to the root copy will be overwritten.
 
 ### Development Server Commands
 

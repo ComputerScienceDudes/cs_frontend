@@ -56,369 +56,54 @@ search_exclude: true
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
 
+
   <!-- Site CSS + JS (from doingexceptionaldeeds.org) -->
   <link rel="stylesheet" href="/assets/dad-site/index.css" />
+  <link rel="stylesheet" href="{{ "/assets/css/dad-home.css" | relative_url }}" />
   <script type="module" src="/assets/dad-site/index.js"></script>
 
-  <style>
-    :root {
-      --dad-green:      #1B4332;
-      --dad-green-dark: #163828;
-      --dad-orange:     #FF6B35;
-      --dad-off-white:  #f8f8f7;
-      --dad-dark:       #1a1a19;
-      --dad-gray:       #858481;
-    }
-
-    /* === PHOTO CAROUSEL === */
-    #dad-carousel-section {
-      background: var(--dad-off-white);
-      padding: 64px 32px;
-      border-top: 1px solid rgba(27,67,50,0.12);
-    }
-    #dad-carousel-section .cs-header { text-align:center; margin-bottom:40px; }
-    #dad-carousel-section .cs-label {
-      font-family:'Space Grotesk',sans-serif; font-size:0.7rem;
-      letter-spacing:0.22em; text-transform:uppercase; color:var(--dad-orange); margin-bottom:10px;
-    }
-    #dad-carousel-section .cs-title {
-      font-family:'Space Grotesk',sans-serif;
-      font-size:clamp(1.6rem,3vw,2.4rem); font-weight:700;
-      color:var(--dad-green); line-height:1.15;
-    }
-    .cs-track-wrap { max-width:1100px; margin:0 auto; position:relative; }
-    .cs-viewport {
-      position:relative; width:100%; aspect-ratio:16/7; max-height:400px;
-      overflow:hidden; border-radius:12px; background:var(--dad-green-dark);
-    }
-    .cs-slide { position:absolute; inset:0; opacity:0; transition:opacity .55s ease; }
-    .cs-slide.active { opacity:1; }
-    .cs-slide img { width:100%; height:100%; object-fit:cover; display:block; }
-    .cs-slide-overlay {
-      position:absolute; bottom:0; left:0; right:0;
-      background:linear-gradient(0deg,rgba(22,56,40,.85) 0%,transparent 100%);
-      padding:32px 28px 22px;
-    }
-    .cs-slide-badge {
-      font-family:'Space Grotesk',sans-serif; font-size:0.62rem;
-      letter-spacing:.16em; text-transform:uppercase; color:var(--dad-orange);
-      background:rgba(255,107,53,.15); border:1px solid rgba(255,107,53,.35);
-      padding:3px 10px; border-radius:4px; display:inline-block; margin-bottom:6px;
-    }
-    .cs-slide-title {
-      font-family:'Space Grotesk',sans-serif; font-size:0.95rem;
-      font-weight:600; color:#fff; line-height:1.35;
-    }
-    .cs-btn {
-      position:absolute; top:50%; transform:translateY(-50%);
-      background:rgba(27,67,50,.7); border:1px solid rgba(255,107,53,.5);
-      color:#fff; width:42px; height:42px; border-radius:50%; cursor:pointer;
-      display:flex; align-items:center; justify-content:center;
-      font-size:1.1rem; transition:background .2s; z-index:5; backdrop-filter:blur(4px);
-    }
-    .cs-btn:hover { background:var(--dad-orange); border-color:var(--dad-orange); }
-    .cs-btn.prev { left:14px; }
-    .cs-btn.next { right:14px; }
-    .cs-dots { display:flex; justify-content:center; gap:7px; margin-top:18px; }
-    .cs-dot {
-      width:8px; height:8px; border-radius:50%;
-      background:rgba(27,67,50,.25); border:none; cursor:pointer;
-      transition:background .2s, transform .2s;
-    }
-    .cs-dot.active { background:var(--dad-green); transform:scale(1.3); }
-    .cs-empty {
-      display:flex; flex-direction:column; align-items:center; justify-content:center;
-      height:100%; color:rgba(255,255,255,.5);
-      font-family:'Space Grotesk',sans-serif; font-size:.9rem; gap:10px;
-    }
-
-    /* === AI CHATBOT === */
-    #dad-auth-pill {
-      display:flex; align-items:center; gap:8px; margin-left:8px;
-    }
-    #dad-signin-btn {
-      font-family:inherit; font-size:0.8rem; font-weight:700;
-      letter-spacing:0.04em; text-decoration:none; cursor:pointer;
-      padding:6px 14px; border-radius:20px; border:none;
-      background:var(--dad-orange); color:#fff;
-      transition:background .2s, transform .15s;
-    }
-    #dad-signin-btn:hover { background:#e55a25; transform:scale(1.03); }
-    #dad-signout-btn {
-      font-family:inherit; font-size:0.8rem; font-weight:700;
-      letter-spacing:0.04em; cursor:pointer;
-      padding:6px 14px; border-radius:20px;
-      background:rgba(255,255,255,0.15); color:#fff;
-      border:1px solid rgba(255,255,255,0.35);
-      transition:background .2s, transform .15s;
-    }
-    #dad-signout-btn:hover { background:rgba(255,255,255,0.25); transform:scale(1.03); }
-    #dad-auth-name {
-      font-size:0.78rem; color:rgba(255,255,255,0.85); font-weight:500; white-space:nowrap;
-    }
-
-    #dad-chat-toggle {
-      position:fixed; bottom:28px; right:28px; z-index:9999;
-      width:58px; height:58px; background:var(--dad-green); border:none;
-      border-radius:50%; cursor:pointer;
-      display:flex; align-items:center; justify-content:center;
-      box-shadow:0 4px 20px rgba(0,0,0,.3); transition:background .2s, transform .2s;
-    }
-    #dad-chat-toggle:hover { background:var(--dad-green-dark); transform:scale(1.07); }
-    #dad-chat-toggle svg { width:26px; height:26px; fill:#fff; transition:opacity .2s; }
-    #dad-chat-toggle .icon-close { display:none; }
-    #dad-chat-toggle.open .icon-chat { display:none; }
-    #dad-chat-toggle.open .icon-close { display:block; }
-
-    #dad-chat-window {
-      position:fixed; bottom:100px; right:28px; z-index:9998;
-      width:360px; max-height:540px; background:var(--dad-off-white);
-      border-radius:12px; box-shadow:0 8px 40px rgba(0,0,0,.22);
-      display:flex; flex-direction:column; overflow:hidden;
-      border:1px solid rgba(27,67,50,.2);
-      transform:translateY(16px) scale(.97); opacity:0; pointer-events:none; visibility:hidden;
-      transition:transform .25s ease, opacity .25s ease;
-    }
-    #dad-chat-window.open { transform:translateY(0) scale(1); opacity:1; pointer-events:all; visibility:visible; }
-
-    .dcw-header {
-      background:var(--dad-green); padding:14px 18px;
-      display:flex; align-items:center; gap:12px; flex-shrink:0;
-    }
-    .dcw-avatar {
-      width:36px; height:36px; background:var(--dad-orange); border-radius:50%;
-      display:flex; align-items:center; justify-content:center;
-      font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:.75rem; color:#fff; flex-shrink:0;
-    }
-    .dcw-info { flex:1; }
-    .dcw-name {
-      font-family:'Space Grotesk',sans-serif; font-size:.82rem; font-weight:700;
-      letter-spacing:.04em; text-transform:uppercase; color:#fff; line-height:1.2;
-    }
-    .dcw-status { font-size:.65rem; color:var(--dad-orange); letter-spacing:.08em; text-transform:uppercase; }
-    .dcw-admin-link {
-      font-family:'Space Grotesk',sans-serif; font-size:.62rem;
-      letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.7);
-      text-decoration:none; border:1px solid rgba(255,255,255,.2);
-      padding:4px 10px; border-radius:4px; transition:color .2s, border-color .2s; white-space:nowrap;
-    }
-    .dcw-admin-link:hover { color:var(--dad-orange); border-color:var(--dad-orange); }
-
-    .dcw-messages {
-      flex:1; overflow-y:auto; padding:16px;
-      display:flex; flex-direction:column; gap:12px; background:#f1efe8;
-    }
-    .dcw-messages::-webkit-scrollbar { width:4px; }
-    .dcw-messages::-webkit-scrollbar-thumb { background:rgba(27,67,50,.25); border-radius:2px; }
-    .dcw-msg { display:flex; gap:8px; align-items:flex-end; }
-    .dcw-msg.user { flex-direction:row-reverse; }
-    .dcw-bubble {
-      max-width:80%; padding:10px 14px;
-      font-family:'Source Sans 3',sans-serif; font-size:.85rem; line-height:1.55; border-radius:10px;
-    }
-    .dcw-msg.bot .dcw-bubble { background:var(--dad-green); color:#fff; border-bottom-left-radius:2px; }
-    .dcw-msg.user .dcw-bubble { background:var(--dad-orange); color:#fff; border-bottom-right-radius:2px; font-weight:500; }
-    .dcw-msg-avatar {
-      width:26px; height:26px; border-radius:50%; background:var(--dad-green);
-      display:flex; align-items:center; justify-content:center;
-      font-family:'Space Grotesk',sans-serif; font-size:.6rem; font-weight:700; color:#fff; flex-shrink:0;
-    }
-    .dcw-msg.user .dcw-msg-avatar { background:var(--dad-orange); }
-    .dcw-typing {
-      display:flex; align-items:center; gap:4px;
-      padding:10px 14px; background:var(--dad-green);
-      border-radius:10px; border-bottom-left-radius:2px; width:fit-content;
-    }
-    .dcw-typing span {
-      width:6px; height:6px; background:rgba(255,255,255,.7);
-      border-radius:50%; animation:dcw-dot 1.2s infinite;
-    }
-    .dcw-typing span:nth-child(2) { animation-delay:.2s; }
-    .dcw-typing span:nth-child(3) { animation-delay:.4s; }
-    @keyframes dcw-dot {
-      0%,60%,100% { opacity:.3; transform:translateY(0); }
-      30% { opacity:1; transform:translateY(-3px); }
-    }
-    .dcw-input-row {
-      display:flex; align-items:center;
-      border-top:1px solid rgba(27,67,50,.12);
-      background:var(--dad-off-white); flex-shrink:0;
-    }
-    #dad-chat-input {
-      flex:1; border:none; outline:none; background:transparent;
-      padding:13px 16px; font-family:'Source Sans 3',sans-serif;
-      font-size:.88rem; color:var(--dad-dark); resize:none;
-    }
-    #dad-chat-input::placeholder { color:#aaa; }
-    #dad-chat-send {
-      width:44px; height:44px; background:var(--dad-green); border:none; cursor:pointer;
-      display:flex; align-items:center; justify-content:center;
-      flex-shrink:0; transition:background .2s; margin:4px; border-radius:8px;
-    }
-    #dad-chat-send:hover { background:var(--dad-green-dark); }
-    #dad-chat-send svg { width:18px; height:18px; fill:#fff; }
-    .dcw-footer-note {
-      text-align:center; font-size:.6rem; letter-spacing:.08em;
-      color:#bbb; padding:5px 16px 8px; background:var(--dad-off-white);
-      text-transform:uppercase; border-top:1px solid rgba(0,0,0,.05);
-    }
-
-    /* === SUBMIT DEED BUTTON === */
-    #dad-submit-btn {
-      position:fixed; bottom:28px; left:28px; z-index:9999;
-      background:var(--dad-orange); color:#fff; border:none; border-radius:50px;
-      padding:12px 22px; font-family:'Space Grotesk',sans-serif;
-      font-size:.78rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
-      cursor:pointer; display:flex; align-items:center; gap:8px;
-      box-shadow:0 4px 20px rgba(0,0,0,.25); transition:background .2s, transform .15s;
-    }
-    #dad-submit-btn:hover { background:#e85c28; transform:translateY(-2px); }
-    #dad-submit-btn svg { width:16px; height:16px; fill:#fff; }
-
-    /* === SUBMIT DEED MODAL === */
-    #dad-submit-modal {
-      position:fixed; inset:0; z-index:10000;
-      background:rgba(22,56,40,.75); backdrop-filter:blur(4px);
-      display:flex; align-items:center; justify-content:center; padding:20px;
-      opacity:0; pointer-events:none; visibility:hidden;
-      transition:opacity .25s ease, visibility .25s ease;
-    }
-    #dad-submit-modal.open { opacity:1; pointer-events:all; visibility:visible; }
-    .dsm-card {
-      background:var(--dad-off-white); border-radius:14px;
-      width:100%; max-width:520px; max-height:90vh; overflow-y:auto;
-      box-shadow:0 20px 60px rgba(0,0,0,.3);
-    }
-    .dsm-header {
-      background:var(--dad-green); padding:20px 24px;
-      display:flex; align-items:center; justify-content:space-between;
-      border-radius:14px 14px 0 0;
-    }
-    .dsm-title {
-      font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:700;
-      text-transform:uppercase; letter-spacing:.06em; color:#fff;
-    }
-    .dsm-close {
-      background:none; border:none; cursor:pointer;
-      color:rgba(255,255,255,.7); font-size:1.4rem; line-height:1; transition:color .2s;
-    }
-    .dsm-close:hover { color:var(--dad-orange); }
-    .dsm-body { padding:28px 24px; }
-    .dsm-login-required {
-      background:rgba(255,107,53,.1); border:1.5px solid rgba(255,107,53,.35);
-      border-radius:8px; padding:16px; margin-bottom:20px; text-align:center; display:none;
-    }
-    .dsm-login-required p { font-size:.9rem; color:var(--dad-dark); margin-bottom:10px; }
-    .dsm-login-required a {
-      background:var(--dad-green); color:#fff; padding:8px 20px; border-radius:6px;
-      text-decoration:none; font-weight:600; font-size:.85rem; transition:background .2s;
-    }
-    .dsm-login-required a:hover { background:var(--dad-green-dark); }
-    .dsm-label {
-      display:block; font-family:'Space Grotesk',sans-serif; font-size:.75rem; font-weight:600;
-      letter-spacing:.1em; text-transform:uppercase; color:var(--dad-green); margin-bottom:8px;
-    }
-    .dsm-group { margin-bottom:20px; }
-    .dsm-input, .dsm-textarea, .dsm-select {
-      width:100%; padding:11px 14px;
-      border:1.5px solid rgba(27,67,50,.18); border-radius:8px;
-      font-family:'Source Sans 3',sans-serif; font-size:.9rem; color:var(--dad-dark);
-      background:#fff; transition:border-color .2s, box-shadow .2s;
-    }
-    .dsm-input:focus, .dsm-textarea:focus, .dsm-select:focus {
-      outline:none; border-color:var(--dad-green); box-shadow:0 0 0 3px rgba(27,67,50,.1);
-    }
-    .dsm-textarea { min-height:110px; resize:vertical; }
-    .dsm-upload-area {
-      border:2px dashed rgba(27,67,50,.25); border-radius:8px;
-      padding:24px 16px; text-align:center; cursor:pointer;
-      transition:all .2s; background:rgba(27,67,50,.02);
-    }
-    .dsm-upload-area:hover { border-color:var(--dad-green); background:rgba(27,67,50,.04); }
-    .dsm-upload-area.dragging { border-color:var(--dad-orange); background:rgba(255,107,53,.05); }
-    .dsm-upload-icon { font-size:28px; margin-bottom:8px; }
-    .dsm-upload-text { font-size:.85rem; color:var(--dad-green); font-weight:600; }
-    .dsm-upload-hint { font-size:.75rem; color:var(--dad-gray); margin-top:4px; }
-    .dsm-img-preview { display:none; margin-top:12px; }
-    .dsm-img-preview img { max-width:100%; max-height:200px; border-radius:6px; }
-    .dsm-char { font-size:.75rem; color:var(--dad-gray); text-align:right; margin-top:5px; }
-    .dsm-submit-btn {
-      width:100%; padding:13px 24px; background:var(--dad-green); color:#fff;
-      border:none; border-radius:8px; font-family:'Space Grotesk',sans-serif;
-      font-size:.85rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
-      cursor:pointer; transition:background .2s, transform .15s; margin-top:8px;
-    }
-    .dsm-submit-btn:hover { background:var(--dad-green-dark); transform:translateY(-1px); }
-    .dsm-submit-btn:disabled { background:var(--dad-gray); cursor:not-allowed; transform:none; }
-    .dsm-alert {
-      padding:12px 16px; border-radius:6px; margin-bottom:16px; font-size:.88rem; display:none;
-    }
-    .dsm-alert.success { background:#d4edda; color:#155724; border:1px solid #c3e6cb; }
-    .dsm-alert.error   { background:#f8d7da; color:#721c24; border:1px solid #f5c6cb; }
-    .dsm-alert.show    { display:block; }
-
-    /* ── Mobile overrides ── */
-    @media (max-width:768px) {
-      #dad-carousel-section { padding: 44px 16px; }
-      .cs-viewport { max-height: 260px; }
-      .cs-slide-overlay { padding: 20px 16px 14px; }
-      .cs-slide-title { font-size: 0.85rem; }
-      .cs-btn { width:36px; height:36px; font-size:0.9rem; }
-      .cs-btn.prev { left:8px; }
-      .cs-btn.next { right:8px; }
-      #dad-submit-modal { padding: 12px; }
-    }
-
-    @media (max-width:480px) {
-      /* floating buttons — chat right, submit left, both same height */
-      #dad-chat-toggle { right:16px; bottom:16px; width:52px; height:52px; }
-      #dad-submit-btn  { left:16px; bottom:16px; font-size:0; padding:0; width:52px; height:52px; border-radius:50%; justify-content:center; }
-      #dad-submit-btn svg { width:22px; height:22px; margin:0; }
-      /* chat window full-width near bottom */
-      #dad-chat-window { right:10px; left:10px; width:auto; bottom:82px; max-height:70vh; }
-      /* auth pill compact on small nav */
-      #dad-auth-name { display:none; }
-      #dad-signin-btn, #dad-signout-btn { font-size:0.72rem; padding:5px 10px; }
-    }
-  </style>
-  <style>
-    /* prevent horizontal scroll from React bundle */
-    html, body { overflow-x: hidden; max-width: 100vw; }
-  </style>
 </head>
-<body>
+<body class="dad-home">
 
   <!-- Auth pill — injected into React nav after it renders -->
-  <div id="dad-auth-pill" style="display:none;">
+  <div id="dad-auth-pill" hidden>
     <span id="dad-auth-name"></span>
-    <a href="/login" id="dad-signin-btn">Sign In</a>
-    <button id="dad-signout-btn" style="display:none;">Sign Out</button>
+    <a href="/login" id="dad-signin-btn" class="ocs__btn outline pill">Sign In</a>
+    <button class="ocs__btn accent fill" type="button" id="dad-signout-btn" hidden>Sign Out</button>
   </div>
 
   <!-- React app renders full doingexceptionaldeeds.org site here -->
   <div id="root"></div>
 
   <!-- PHOTO CAROUSEL (injected below React app after it mounts) -->
-  <div id="dad-carousel-section" style="display:none;">
-    <div class="cs-header">
-      <div class="cs-label">Community Impact</div>
-      <h2 class="cs-title">Deeds In Action</h2>
-    </div>
-    <div class="cs-track-wrap">
+  <section id="dad-carousel-section" class="ocs__container" aria-labelledby="deeds-heading" hidden>
+    <header class="cs-header">
+      <p class="ocs_badge">Community Impact</p>
+      <h2 class="ocs_section-title" id="deeds-heading">Deeds In Action</h2>
+    </header>
+    <div class="cs-track-wrap ocs__card">
       <div class="cs-viewport" id="cs-viewport">
         <div class="cs-empty" id="cs-empty">
-          <span style="font-size:2rem;">&#128444;</span>
+          <span class="cs-empty-icon" aria-hidden="true">&#128444;</span>
           <span>Community deeds will appear here soon.</span>
         </div>
       </div>
-      <button class="cs-btn prev" id="cs-prev" aria-label="Previous" style="display:none;">&#8249;</button>
-      <button class="cs-btn next" id="cs-next" aria-label="Next"     style="display:none;">&#8250;</button>
+      <button class="cs-btn prev ocs__btn outline" id="cs-prev" aria-label="Previous" hidden>&#8249;</button>
+      <button class="cs-btn next ocs__btn outline" id="cs-next" aria-label="Next"     hidden>&#8250;</button>
       <div class="cs-dots" id="cs-dots"></div>
+      <div class="ocs__links">
+        <label class="ocs__toggle ocs__toggle--green">
+          <input type="checkbox" class="ocs__toggle-input" id="carousel-autoplay" disabled aria-describedby="carousel-status">
+          <span class="ocs__toggle-track" aria-hidden="true"></span>
+          <span class="ocs__toggle-label">Play slideshow automatically</span>
+        </label>
+        <output id="carousel-status" class="ocs_status" aria-live="polite">Slideshow paused</output>
+      </div>
     </div>
-  </div>
+  </section>
 
   <!-- AI CHATBOT TOGGLE -->
-  <button id="dad-chat-toggle" aria-label="Open D.A.D. assistant" title="Chat with D.A.D. Assistant">
+  <button class="ocs__btn accent fill" type="button" id="dad-chat-toggle" aria-label="Open D.A.D. assistant" title="Chat with D.A.D. Assistant">
     <svg class="icon-chat" viewBox="0 0 24 24"><path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H6l-2 2V4h16v10z"/></svg>
     <svg class="icon-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
   </button>
@@ -428,10 +113,10 @@ search_exclude: true
     <div class="dcw-header">
       <div class="dcw-avatar">D</div>
       <div class="dcw-info">
-        <div class="dcw-name">D.A.D. Assistant</div>
-        <div class="dcw-status">&#x25CF; Online</div>
+        <h2 class="dcw-name ocs_section-title">D.A.D. Assistant</h2>
+        <p class="dcw-status ocs_status">&#x25CF; Online</p>
       </div>
-      <a href="/chat" id="dcw-admin-link" class="dcw-admin-link" style="display:none;">Talk to Admin</a>
+      <a href="/chat" id="dcw-admin-link" class="dcw-admin-link" hidden>Talk to Admin</a>
     </div>
     <div class="dcw-messages" id="dad-chat-messages">
       <div class="dcw-msg bot">
@@ -440,8 +125,8 @@ search_exclude: true
       </div>
     </div>
     <div class="dcw-input-row">
-      <textarea id="dad-chat-input" placeholder="Type your message&#x2026;" rows="1" aria-label="Chat message"></textarea>
-      <button id="dad-chat-send" aria-label="Send">
+      <textarea class="ocs__input medium" name="message" id="dad-chat-input" placeholder="Type your message&#x2026;" rows="1" aria-label="Chat message"></textarea>
+      <button class="ocs__btn accent fill" type="button" id="dad-chat-send" aria-label="Send">
         <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
       </button>
     </div>
@@ -449,27 +134,27 @@ search_exclude: true
   </div>
 
   <!-- SUBMIT A DEED -->
-  <button id="dad-submit-btn" aria-label="Submit a deed">
+  <button class="ocs__btn accent fill" type="button" id="dad-submit-btn" aria-label="Submit a deed">
     <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
     Submit a Deed
   </button>
 
-  <div id="dad-submit-modal" role="dialog" aria-label="Submit a Deed">
-    <div class="dsm-card">
+  <div id="dad-submit-modal" role="dialog" aria-labelledby="deed-title" aria-modal="true">
+    <div class="dsm-card ocs__card">
       <div class="dsm-header">
-        <span class="dsm-title">Submit Your Deed</span>
-        <button class="dsm-close" id="dsm-close" aria-label="Close">&#215;</button>
+        <h2 class="dsm-title ocs_section-title" id="deed-title">Submit Your Deed</h2>
+        <button class="dsm-close ocs__btn outline small" id="dsm-close" aria-label="Close">&#215;</button>
       </div>
       <div class="dsm-body">
-        <div class="dsm-alert" id="dsm-alert"></div>
-        <div class="dsm-login-required" id="dsm-login-required">
+        <div class="dsm-alert" id="dsm-alert" role="status" aria-live="polite"></div>
+        <div class="dsm-login-required ocs__callout" id="dsm-login-required" hidden>
           <p>You must be logged in to submit a deed.</p>
-          <a href="/login">Log In Now</a>
+          <a href="/login" class="ocs__btn accent fill">Log In Now</a>
         </div>
-        <div id="dsm-form">
-          <div class="dsm-group">
+        <form id="dsm-form" class="ocs__grid ocs__grid--standard cols-2">
+          <div class="dsm-group ocs__grid-cell">
             <label class="dsm-label" for="dsm-category">Category</label>
-            <select id="dsm-category" class="dsm-select">
+            <select id="dsm-category" name="category" class="ocs__input medium" required>
               <option value="">Select a category&#x2026;</option>
               <option value="volunteer">Volunteer</option>
               <option value="charity">Charity</option>
@@ -483,26 +168,26 @@ search_exclude: true
               <option value="Misc">Miscellaneous</option>
             </select>
           </div>
-          <div class="dsm-group">
+          <div class="dsm-group ocs__grid-cell">
             <label class="dsm-label" for="dsm-desc">Description</label>
-            <textarea id="dsm-desc" class="dsm-textarea" placeholder="Describe the deed you want to submit&#x2026;" maxlength="2000"></textarea>
+            <textarea id="dsm-desc" name="description" class="ocs__input medium" rows="4" required placeholder="Describe the deed you want to submit&#x2026;" maxlength="2000"></textarea>
             <div class="dsm-char"><span id="dsm-char-count">0</span>/2000</div>
           </div>
-          <div class="dsm-group">
-            <label class="dsm-label">Photo (Optional)</label>
+          <div class="dsm-group ocs__grid-cell ocs__grid-cell--wide">
+            <label class="dsm-label" for="dsm-file">Photo (Optional)</label>
             <div class="dsm-upload-area" id="dsm-upload-area">
               <div class="dsm-upload-icon">&#x1F4F8;</div>
               <div class="dsm-upload-text">Click to upload or drag &amp; drop</div>
               <div class="dsm-upload-hint">PNG, JPG, GIF, WEBP &mdash; max 10 MB</div>
-              <input type="file" id="dsm-file" style="display:none;" accept="image/*">
+              <input type="file" id="dsm-file" name="photo" class="ocs__input small" accept="image/*">
             </div>
-            <div class="dsm-img-preview" id="dsm-preview">
+            <div class="dsm-img-preview" id="dsm-preview" hidden>
               <img id="dsm-preview-img" alt="Preview">
-              <button type="button" id="dsm-remove-img" style="margin-top:8px;background:none;border:1px solid var(--dad-gray);color:var(--dad-gray);padding:5px 12px;border-radius:4px;cursor:pointer;font-size:.78rem;">Remove Image</button>
+              <button type="button" id="dsm-remove-img" class="ocs__btn outline small">Remove Image</button>
             </div>
           </div>
-          <button class="dsm-submit-btn" id="dsm-submit-btn" disabled>Submit Deed</button>
-        </div>
+          <button class="dsm-submit-btn ocs__btn accent fill ocs__grid-cell ocs__grid-cell--header" id="dsm-submit-btn" type="submit" disabled>Submit Deed</button>
+        </form>
       </div>
     </div>
   </div>
@@ -515,7 +200,7 @@ search_exclude: true
       var sections = document.querySelectorAll('#root section');
       if (sections.length < 2) { setTimeout(injectCarousel, 300); return; }
       var cs = document.getElementById('dad-carousel-section');
-      if (cs) { cs.style.display = ''; sections[1].after(cs); }
+      if (cs) { cs.hidden = false; sections[1].after(cs); }
     })();
 
     /* ── Inject auth pill into React nav next to Donate button ── */
@@ -523,7 +208,7 @@ search_exclude: true
       var donateLink = document.querySelector('a[href="/donate"]');
       if (!donateLink) { setTimeout(injectAuthPill, 300); return; }
       var pill = document.getElementById('dad-auth-pill');
-      if (pill) { pill.style.display = 'flex'; donateLink.after(pill); }
+      if (pill) { pill.hidden = false; donateLink.after(pill); }
     })();
 
     /* ── Auth check ── */
@@ -534,37 +219,53 @@ search_exclude: true
         var signinBtn = document.getElementById('dad-signin-btn');
         var signoutBtn = document.getElementById('dad-signout-btn');
         var authName = document.getElementById('dad-auth-name');
-        if (pill) pill.style.display = 'flex';
+        if (pill) pill.hidden = false;
         if (user) {
-          if (signinBtn) signinBtn.style.display = 'none';
-          if (signoutBtn) signoutBtn.style.display = '';
+          if (signinBtn) signinBtn.hidden = true;
+          if (signoutBtn) signoutBtn.hidden = false;
           if (authName) authName.textContent = user.name || user._name || '';
           if (signoutBtn) signoutBtn.addEventListener('click', async function() {
             try { await fetch(pythonURI + '/api/signout', { ...fetchOptions, redirect: 'manual' }); } catch(e) {}
             window.location.reload();
           });
           var al = document.getElementById('dcw-admin-link');
-          if (al) al.style.display = 'inline-block';
+          if (al) al.hidden = false;
           var sb = document.getElementById('dsm-submit-btn');
           if (sb) sb.disabled = false;
         } else {
-          if (signinBtn) signinBtn.style.display = '';
-          if (signoutBtn) signoutBtn.style.display = 'none';
+          if (signinBtn) signinBtn.hidden = false;
+          if (signoutBtn) signoutBtn.hidden = true;
           if (authName) authName.textContent = '';
           var lr = document.getElementById('dsm-login-required');
-          if (lr) lr.style.display = 'block';
+          if (lr) lr.hidden = false;
           var frm = document.getElementById('dsm-form');
-          if (frm) { frm.style.opacity='.5'; frm.style.pointerEvents='none'; }
+          if (frm) { frm.classList.add('is-disabled'); frm.inert = true; }
         }
       })
       .catch(function(){
         var lr = document.getElementById('dsm-login-required');
-        if (lr) lr.style.display = 'block';
+        if (lr) lr.hidden = false;
       });
 
     /* ── Photo carousel ── */
     (function(){
       var slides=[], current=0, timer;
+      var autoplay = document.getElementById('carousel-autoplay');
+      var status = document.getElementById('carousel-status');
+      var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      autoplay.checked = !motion.matches;
+      function updateAutoplay() {
+        clearInterval(timer);
+        var playing = autoplay.checked && slides.length > 1 && !document.hidden;
+        status.textContent = playing ? 'Slideshow playing' : 'Slideshow paused';
+        if (playing) timer = setInterval(function(){ goTo((current+1)%slides.length); }, 5000);
+      }
+      autoplay.addEventListener('change', updateAutoplay);
+      document.addEventListener('visibilitychange', updateAutoplay);
+      motion.addEventListener('change', function(event){
+        if (event.matches) autoplay.checked = false;
+        updateAutoplay();
+      });
       fetch(pythonURI + '/api/carousel', fetchOptions)
         .then(function(r){ return r.ok ? r.json() : []; })
         .then(function(items){
@@ -573,10 +274,11 @@ search_exclude: true
           var prevBtn  = document.getElementById('cs-prev');
           var nextBtn  = document.getElementById('cs-next');
           var empty    = document.getElementById('cs-empty');
-          if (!items || !items.length) return;
-          if (empty) empty.style.display = 'none';
-          if (prevBtn) prevBtn.style.display = '';
-          if (nextBtn) nextBtn.style.display = '';
+          if (!items || !items.length) { status.textContent = 'No slideshow photos yet'; return; }
+          autoplay.disabled = items.length < 2;
+          if (empty) empty.hidden = true;
+          if (prevBtn) prevBtn.hidden = false;
+          if (nextBtn) nextBtn.hidden = false;
           items.forEach(function(item, i){
             var slide = document.createElement('div');
             slide.className = 'cs-slide' + (i===0?' active':'');
@@ -586,8 +288,8 @@ search_exclude: true
             slide.innerHTML = imgSrc
               ? '<img src="'+imgSrc+'" alt="'+(item.title||'Deed photo')+'" loading="lazy">'
                 +'<div class="cs-slide-overlay"><span class="cs-slide-badge">'+(item.category||'Deed')+'</span>'
-                +'<div class="cs-slide-title">'+(item.title||item.description||'')+'</div></div>'
-              : '<div style="width:100%;height:100%;background:var(--dad-green-dark);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);font-size:3rem;">&#x1F91D;</div>';
+                +'<h3 class="cs-slide-title">'+(item.title||item.description||'')+'</h3></div>'
+              : '<div class="cs-placeholder">&#x1F91D;</div>';
             viewport.appendChild(slide);
             var dot = document.createElement('button');
             dot.className = 'cs-dot'+(i===0?' active':'');
@@ -599,12 +301,12 @@ search_exclude: true
           if (slides.length > 1) {
             prevBtn.addEventListener('click', function(){ goTo((current-1+slides.length)%slides.length); });
             nextBtn.addEventListener('click', function(){ goTo((current+1)%slides.length); });
-            timer = setInterval(function(){ goTo((current+1)%slides.length); }, 5000);
+            updateAutoplay();
           } else {
-            if (prevBtn) prevBtn.style.display='none';
-            if (nextBtn) nextBtn.style.display='none';
+            if (prevBtn) prevBtn.hidden = true;
+            if (nextBtn) nextBtn.hidden = true;
           }
-        }).catch(function(){});
+        }).catch(function(){ status.textContent = 'Slideshow unavailable'; });
 
       function goTo(idx){
         if (!slides.length) return;
@@ -614,8 +316,7 @@ search_exclude: true
         current=idx;
         slides[current].classList.add('active');
         if (dots[current]) dots[current].classList.add('active');
-        clearInterval(timer);
-        if (slides.length>1) timer=setInterval(function(){ goTo((current+1)%slides.length); },5000);
+        updateAutoplay();
       }
     })();
 
@@ -679,16 +380,26 @@ search_exclude: true
       var closeBtn=document.getElementById('dsm-close');
       var uploadedImage=null;
 
-      openBtn.addEventListener('click',function(){ modal.classList.add('open'); });
-      closeBtn.addEventListener('click',function(){ modal.classList.remove('open'); });
-      modal.addEventListener('click',function(e){ if(e.target===modal)modal.classList.remove('open'); });
+      function closeModal() { modal.classList.remove('open'); openBtn.focus(); }
+      openBtn.addEventListener('click',function(){ modal.classList.add('open'); closeBtn.focus(); });
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click',function(e){ if(e.target===modal) closeModal(); });
+      modal.addEventListener('keydown',function(e){
+        if (e.key === 'Escape') { e.preventDefault(); closeModal(); }
+        if (e.key !== 'Tab') return;
+        var controls = Array.from(modal.querySelectorAll('button, a[href], input, select, textarea'))
+          .filter(function(el){ return !el.disabled && !el.closest('[hidden], [inert]') && el.getClientRects().length; });
+        var first = controls[0], last = controls[controls.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      });
 
       var desc=document.getElementById('dsm-desc');
       desc.addEventListener('input',function(){ document.getElementById('dsm-char-count').textContent=desc.value.length; });
 
       var uploadArea=document.getElementById('dsm-upload-area');
       var fileInput=document.getElementById('dsm-file');
-      uploadArea.addEventListener('click',function(){ fileInput.click(); });
+
       uploadArea.addEventListener('dragover',function(e){ e.preventDefault(); uploadArea.classList.add('dragging'); });
       uploadArea.addEventListener('dragleave',function(){ uploadArea.classList.remove('dragging'); });
       uploadArea.addEventListener('drop',function(e){
@@ -697,7 +408,7 @@ search_exclude: true
       });
       fileInput.addEventListener('change',function(e){ if(e.target.files.length)handleFile(e.target.files[0]); });
       document.getElementById('dsm-remove-img').addEventListener('click',function(){
-        uploadedImage=null; fileInput.value=''; document.getElementById('dsm-preview').style.display='none';
+        uploadedImage=null; fileInput.value=''; document.getElementById('dsm-preview').hidden = true;
       });
 
       function handleFile(file){
@@ -706,7 +417,7 @@ search_exclude: true
         reader.onload=function(e){
           uploadedImage=e.target.result.split(',')[1];
           document.getElementById('dsm-preview-img').src=e.target.result;
-          document.getElementById('dsm-preview').style.display='block';
+          document.getElementById('dsm-preview').hidden = false;
         };
         reader.readAsDataURL(file);
       }
@@ -716,15 +427,17 @@ search_exclude: true
         el.textContent=msg; el.className='dsm-alert '+type+' show';
       }
 
-      document.getElementById('dsm-submit-btn').addEventListener('click',function(){
+      document.getElementById('dsm-form').addEventListener('submit',function(event){
+        event.preventDefault();
+        var btn = document.getElementById('dsm-submit-btn');
+        if (btn.disabled) return;
         var category=document.getElementById('dsm-category').value;
         var description=desc.value.trim();
         if(!category){ showAlert('Please select a category.','error'); return; }
         if(!description){ showAlert('Please enter a description.','error'); return; }
-        this.disabled=true; this.textContent='Submitting…';
+        btn.disabled=true; btn.textContent='Submitting…';
         var payload={content:description,category:category};
         if(uploadedImage) payload.image=uploadedImage;
-        var btn=this;
         fetch(pythonURI+'/submit/create',Object.assign({},fetchOptions,{method:'POST',body:JSON.stringify(payload)}))
           .then(function(r){ return r.json().then(function(d){return{ok:r.ok,d:d};}); })
           .then(function(res){

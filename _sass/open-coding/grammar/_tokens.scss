@@ -1,0 +1,12 @@
+$ocs-space: .5rem !default;
+$ocs-radius: .75rem !default;
+$ocs-mobile: 40rem !default;
+$ocs-text: var(--pref-text-color, #1a1a19);
+$ocs-surface: var(--pref-bg-color, #f8f8f7);
+$ocs-accent: var(--pref-accent-color, #1b4332);
+$ocs-border: var(--ui-border, #a6b8ae);
+
+@mixin ocs-focus {
+  outline: 3px solid $ocs-accent;
+  outline-offset: 3px;
+}

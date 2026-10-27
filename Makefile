@@ -3,6 +3,14 @@ PORT ?= 4500
 LOG_FILE = /tmp/jekyll$(PORT).log
 PYTHON := venv/bin/python3
 
+# Prefer the supported Homebrew Ruby without changing the user's global shell.
+# Ruby 4 cannot resolve the current GitHub Pages dependency set.
+RUBY_BIN ?= $(firstword $(wildcard /opt/homebrew/opt/ruby@3.3/bin /usr/local/opt/ruby@3.3/bin))
+ifneq ($(RUBY_BIN),)
+export PATH := $(RUBY_BIN):$(PATH)
+unexport GEM_HOME GEM_PATH
+endif
+
 SHELL = /bin/bash -c
 .SHELLFLAGS = -e
 

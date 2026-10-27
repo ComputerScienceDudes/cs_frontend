@@ -1,0 +1,17 @@
+// The typography lesson uses single underscores; other lessons use double.
+.ocs_section-title, .ocs__section-title {
+  font-family: var(--pref-font-family, 'Space Grotesk', sans-serif);
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 $ocs-space * 2;
+  color: inherit;
+}
+.ocs_text, .ocs__text, .ocs_description, .ocs__description, .ocs_lead {
+  font-family: var(--pref-font-family, 'Source Sans 3', sans-serif);
+  color: inherit;
+  line-height: 1.6;
+  margin: 0 0 $ocs-space * 2;
+}
+.ocs_lead { font-size: 1.125rem; }
+.ocs_badge, .ocs__badge { font-size: .75rem; font-weight: 600; letter-spacing: .08em; }
+.ocs_status, .ocs__status { font-size: .875rem; line-height: 1.5; }

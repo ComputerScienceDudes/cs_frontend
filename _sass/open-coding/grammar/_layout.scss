@@ -1,0 +1,47 @@
+.ocs__container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: $ocs-space * 4 $ocs-space * 3;
+  font-family: var(--pref-font-family, 'Source Sans 3', sans-serif);
+  color: $ocs-text;
+  &, * { box-sizing: border-box; }
+}
+
+.ocs__card, .ocs_card {
+  padding: $ocs-space * 3;
+  border: 1px solid $ocs-border;
+  border-radius: $ocs-radius;
+  background: $ocs-surface;
+  color: $ocs-text;
+}
+
+.ocs__grid {
+  display: grid;
+  gap: $ocs-space * 2;
+  min-width: 0;
+  &--standard {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    @each $columns in (2, 3, 4) {
+      &.cols-#{$columns} { grid-template-columns: repeat($columns, minmax(0, 1fr)); }
+    }
+  }
+  &--card { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  &-cell {
+    min-width: 0;
+    &--header { grid-column: 1 / -1; }
+    &--wide { grid-column: span 2; }
+    &--accent { border-left: 3px solid $ocs-accent; padding-left: $ocs-space * 2; }
+  }
+  @media (max-width: $ocs-mobile) {
+    &--standard, &--standard[class*="cols-"], &--card { grid-template-columns: minmax(0, 1fr); }
+    &-cell--wide { grid-column: 1 / -1; }
+  }
+}
+.ocs__links, .ocs__links--wide {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $ocs-space * 2;
+}
+.ocs__links--wide > * { flex: 1 1 auto; }
+.ocs__callout { padding: $ocs-space * 2; border-left: 3px solid $ocs-accent; }
